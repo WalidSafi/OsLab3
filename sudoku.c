@@ -245,6 +245,5 @@ if (markerCheck == 1) {
   local->Puzzle[r][c+0] = 45 - sum;
 }
 
-printf("sum is: %d Location of the zero is: %d, %d \n",sum,r,c);
 return (void *) 1;
 }
