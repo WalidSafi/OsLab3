@@ -233,10 +233,8 @@ void * sqaure_check(void * params){
         int cellValue = local->Puzzle[i][k];
           if(cellValue != 0){
             sum += cellValue;
-            int array[9];
           } else {
-            r = i;
-            c = k;
+            r = i; c = k;
             markerCheck++;
           }
       }
