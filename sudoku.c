@@ -42,13 +42,28 @@ void printpuzzle(int Puzzle[9][9]){
 
 }
 
+int sudokuCheck(int Puzzle[9][9]){
+
+    for (int i = 0; i < 9; i++) {
+      for (int k = 0; k < 9; k++) {
+        int cellValue = Puzzle[i][k];
+        if (cellValue == 0) {
+          return 0;
+        }
+      }
+    }
+    return 1;
+
+}
+
 int main(int argc, char const *argv[]) {
 
   int Puzzle[9][9];
 
   puts("Initial Puzzle obainted from the file puzzle.txt");
   readfile(Puzzle);
-//  printpuzzle(Puzzle);
+  printpuzzle(Puzzle);
+  puts("-------------------------------------");
 
   vars * row_columns = (vars *) malloc(sizeof(vars));
 
@@ -149,18 +164,16 @@ int main(int argc, char const *argv[]) {
     pthread_join(thread_gridEight,&returnG_Eight);
     pthread_join(thread_gridNine,&returnG_Nine);
 
-
-  /*if( (int) returnRow == 1){
-    puts("all rows are complete");
-  }else {
-    puts("invalid solution to puzzle");
-  }
-
-  if ( (int) returnCol == 1) {
-    puts("all colums are complete");
-  } */
-
+  puts("Puzzle After multithreading");
   printpuzzle(Puzzle);
+/*if( returnRow == 1 && returnCol == 1 && returnG_one == 1 && returnG_Two == 1 && returnG_Three == 1 && returnG_Four == 1 && returnG_Five == 1 & returnG_Seven == 1 &&  // Works but gives warnings
+ returnG_Six == 1 && returnG_Eight ==1 && returnG_Nine == 1){ */
+  if(sudokuCheck(Puzzle) == 1){
+    puts("puzzle has been solved");
+  } else {
+    puts(" Puzzle has not been solved, Not enough information provided");
+    }
+  //}
 }
 
 void * rows_check(void * params){
@@ -226,7 +239,7 @@ void * sqaure_check(void * params){
   int sum = 0;
   int r = 0;
   int c = 0;
-  int markerCheck = 0;
+  int marker= 0;
 
   for (int i = start; i < start + 3; ++i) {
     for (int k = col; k < col + 3; ++k) {
@@ -235,11 +248,11 @@ void * sqaure_check(void * params){
             sum += cellValue;
           } else {
             r = i; c = k;
-            markerCheck++;
+            marker++;
           }
       }
   }
-if (markerCheck == 1) {
+if (marker == 1) {
   local->Puzzle[r][c+0] = 45 - sum;
 }
 
