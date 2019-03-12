@@ -16,7 +16,7 @@ void readfile(int Puzzle[9][9]){
 
   FILE *fp;
 
-  fp = fopen("puzzleSolution.txt","r");
+  fp = fopen("puzzle.txt","r");
 
   if (fp == NULL) {
     puts("error opening the file");
